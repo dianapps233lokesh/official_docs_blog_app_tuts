@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import index,detail,results,vote
+# from .views import index,detail,results,vote
+from . import views
 
 # The tutorial project has just one app, polls. In real Django projects, there might be five, ten, twenty apps or more. How does Django differentiate the URL names between them? For example, the polls app has a detail view, and so might an app on the same project that is for a blog. How does one make it so that Django knows which app view to create for a url when using the {% url %} template tag?
 
@@ -9,10 +10,10 @@ app_name="polls"
 
 
 urlpatterns = [
-    path('', index, name="index"),
-    path('<int:question_id>/', detail, name="detail"),
-    path('<int:question_id>/results/', results, name="results"),
-    path('<int:question_id>/vote/', vote, name="vote"),
+    path('', views.IndexView.as_view(), name="index"),
+    path('<int:pk>/', views.DetailView.as_view(), name="detail"),
+    path('<int:pk>/results/', views.ResultView.as_view(), name="results"),
+    path('<int:question_id>/vote/', views.vote, name="vote"),
 ]
 
 # When somebody requests a page from your website – say, “/polls/34/”, Django will load the mysite.urls Python module because it’s pointed to by the ROOT_URLCONF setting. It finds the variable named urlpatterns and traverses the patterns in order. After finding the match at 'polls/', it strips off the matching text ("polls/") and sends the remaining text – "34/" – to the ‘polls.urls’ URLconf for further processing. There it matches '<int:question_id>/', resulting in a call to the detail() view like so:
