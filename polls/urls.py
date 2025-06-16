@@ -4,9 +4,9 @@ from .views import index,detail,results,vote
 
 urlpatterns = [
     path('', index, name="index"),
-    path('<int:question_id>', detail, name="detail"),
-    path('<int:question_id>/results', results, name="results"),
-    path('<int:question_id>/vote', vote, name="vote"),
+    path('<int:question_id>/', detail, name="detail"),
+    path('<int:question_id>/results/', results, name="results"),
+    path('<int:question_id>/vote/', vote, name="vote"),
 ]
 
 # When somebody requests a page from your website – say, “/polls/34/”, Django will load the mysite.urls Python module because it’s pointed to by the ROOT_URLCONF setting. It finds the variable named urlpatterns and traverses the patterns in order. After finding the match at 'polls/', it strips off the matching text ("polls/") and sends the remaining text – "34/" – to the ‘polls.urls’ URLconf for further processing. There it matches '<int:question_id>/', resulting in a call to the detail() view like so:
